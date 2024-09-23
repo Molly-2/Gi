@@ -1,0 +1,7 @@
+{
+  "o": ".",
+  "kimba wood": "Kimba Maureen Wood is an American judge who is a senior district judge of the United States District Court for the Southern District of New York.\n\nhttps://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Kimba_Wood_on_the_Final_Pretrial_Conference_and_the_Civil_Trial.jpg/320px-Kimba_Wood_on_the_Final_Pretrial_Conference_and_the_Civil_Trial.jpg",
+  "pierre schneiter": "François Charles Pierre Schneiter was a French politician.\nhttps://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Pierre_Schneiter_en_1958_%2853_ans%29.jpg/320px-Pierre_Schneiter_en_1958_%2853_ans%29.jpg",
+  "datsun dc-3": "The Datsun DC-3 was a lightweight automobile produced by Nissan and sold under the Datsun brand in 1952.\n\nhttps://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Datsun_Sports_DC3_001.JPG/320px-Datsun_Sports_DC3_001.JPG",
+  "list of defence ministers of thailand": "This is a list of ministers of defence of Thailand. Until the appointment of the incumbent, Sutin Klungsang, aside from Prime Ministers holding the post concurrently, all ministers had been active-duty or retired flag officers. Sutin is the first civilian to be the head of the Ministry of Defence without holding the post of Prime Minister simultaneously, which were held by five former prime ministers without a military background.\n\nhttps://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Flag_of_the_Thai_Defence_Minister.svg/320px-Flag_of_the_Thai_Defence_Minister.svg.png"
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary Teaching App</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #555;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #007bff;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            resize: none;
+            overflow: hidden;
+            max-height: 300px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #summaryResult, #teachResult {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 60px) {
+            form {
+                padding: 10px;
+            }
+
+            textarea, button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Summarizer</h1>
+
+    <!-- Form to get a summary -->
+    <h2>Get Summary</h2>
+    <form id="summaryForm">
+        <label for="query">Enter text to summarize:</label>
+        <textarea id="query" name="query" rows="1" required></textarea>
+        <button type="submit">Get Summary</button>
+    </form>
+    <p id="summaryResult"></p>
+
+    <!-- Form to teach a new summary -->
+    <h2>Teach Summary</h2>
+    <form id="teachForm">
+        <label for="teachQuery">Enter text to teach summary for:</label>
+        <textarea id="teachQuery" name="teachQuery" rows="1" required></textarea><br>
+        <label for="summary">Enter the summary:</label>
+        <textarea id="summary" name="summary" rows="1" required></textarea><br>
+        <label for="key">Access Key:</label>
+        <input type="text" id="key" name="key" required><br>
+        <button type="submit">Teach Summary</button>
+    </form>
+    <p id="teachResult"></p>
+
+    <script>
+        // Function to auto-expand the textarea as you type
+        document.querySelectorAll('textarea').forEach((textarea) => {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 300) + 'px';
+            });
+        });
+
+        // Handle get summary form submission
+        document.getElementById('summaryForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const query = document.getElementById('query').value;
+            const resultElem = document.getElementById('summaryResult');
+
+            try {
+                const response = await fetch(`/summary?query=${encodeURIComponent(query)}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    resultElem.textContent = `Summary: ${data.summary}`;
+                } else {
+                    resultElem.textContent = 'Error fetching summary.';
+                }
+            } catch (error) {
+                resultElem.textContent = 'Error fetching summary.';
+            }
+        });
+
+        // Handle teach summary form submission
+        document.getElementById('teachForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const query = document.getElementById('teachQuery').value;
+            const summary = document.getElementById('summary').value;
+            const key = document.getElementById('key').value;
+            const resultElem = document.getElementById('teachResult');
+
+            try {
+                const response = await fetch('/teachSummary', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query, summary, key })
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    resultElem.textContent = data.response;
+                } else {
+                    resultElem.textContent = 'Error teaching summary.';
+                }
+            } catch (error) {
+                resultElem.textContent = 'Error teaching summary.';
+            }
+        });
+    </script>
+</body>
+</html>
